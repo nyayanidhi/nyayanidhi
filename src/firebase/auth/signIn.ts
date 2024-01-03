@@ -11,6 +11,8 @@ export default async function signIn(email: string, password: string) {
 
   try {
     result = await signInWithEmailAndPassword(auth, email, password); // Sign in with email and password
+    localStorage.setItem("user", JSON.stringify(result.user)); // Store the user in local storage
+    localStorage.setItem("lgstatus", "true"); // Store the user token in local storage
   } catch (e) {
     error = e; // Catch and store any error that occurs during sign-in
   }

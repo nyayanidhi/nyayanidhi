@@ -11,6 +11,8 @@ export default async function logoutFunc() {
 
   try {
     result = await signOut(auth); // Sign in with email and password
+    localStorage.removeItem("user"); // Store the user in local storage
+    localStorage.removeItem("lgstatus"); // Store the user token in local storage
   } catch (e) {
     error = e; // Catch and store any error that occurs during sign-in
   }

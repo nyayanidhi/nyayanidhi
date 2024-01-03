@@ -1,7 +1,6 @@
 "use client";
 import { useAuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
 import { useEffect, ReactNode } from "react";
 
 interface ProtectedRouteProps {
@@ -13,14 +12,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   // const { user } = useAuthContext();
   const { user } = useAuthContext() as { user: any }; // Use 'as' to assert the type as { user: any }
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
     // Redirect to the home page if the user is not logged in
-    if (user === null) {
+    if (user == null) {
       router.push("/");
     }
-    // }, [ user ] );
   }, [user, router]); // Include 'router' in the dependency array to resolve eslint warning
 
   return <>{user && children}</>;
