@@ -17,9 +17,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   useEffect(() => {
     // Redirect to the home page if the user is not logged in
-    if (user != null) {
-      router.push("/dashboard");
-    } else {
+    if (user === null) {
       router.push("/");
     }
     // }, [ user ] );
