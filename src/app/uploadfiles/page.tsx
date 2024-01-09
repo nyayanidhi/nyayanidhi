@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import ProtectedRoute from "@/components/Protected";
+import Link from "next/link";
 
 function UploadFiles(): JSX.Element {
   const [files, setFiles] = useState<FileList | null>(null);
@@ -81,7 +82,9 @@ function UploadFiles(): JSX.Element {
                     <option>Excel</option>
                   </select>
                 </div>
-                <Button className="bg-blue-500">Proceed</Button>
+                <Link href={`/chatwithapp`} className="w-full">
+                  <Button className="bg-blue-500 w-full">Proceed</Button>
+                </Link>
               </div>
             </div>
           </div>
