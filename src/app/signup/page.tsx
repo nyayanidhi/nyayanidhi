@@ -49,7 +49,7 @@ function Page(): JSX.Element {
     console.log(result);
 
     // Redirect to the admin page
-    router.push("/dashboard");
+    router.push("/uploadfiles");
   };
 
   return (

@@ -48,10 +48,7 @@ export default function HomeComponent() {
       return;
     }
 
-    // Sign in successful
-    console.log(result);
-
-    router.push("/dashboard");
+    router.push("/uploadfiles");
   };
 
   return (
