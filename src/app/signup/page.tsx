@@ -46,8 +46,6 @@ function Page(): JSX.Element {
     }
 
     // Sign up successful
-    console.log(result);
-
     // Redirect to the admin page
     router.push("/uploadfiles");
   };
@@ -63,7 +61,7 @@ function Page(): JSX.Element {
                 Register
               </div>
               <h2 className="block mt-1 text-2xl leading-tight font-bold text-black dark:text-white">
-                Unlock Legal Excellence
+                Unlock Legal Excellence with Nyaya Nidhi
               </h2>
             </div>
           </CardHeader>

@@ -4,8 +4,8 @@ import "./globals.css";
 
 // Metadata for the application
 export const metadata = {
-  title: "Vakil App",
-  description: "A vakil app for the modern age.",
+  title: "Nyaya Nidhi",
+  description: "A vakil companion for the modern age.",
 };
 
 // Root layout component for the application

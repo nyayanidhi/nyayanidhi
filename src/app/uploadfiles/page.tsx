@@ -1,15 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import ProtectedRoute from "@/components/Protected";
 import Link from "next/link";
 
 function UploadFiles(): JSX.Element {
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFiles(e.target.files);
+    if (e.target.files) {
+      setFiles(Array.from(e.target.files));
+    }
   };
 
   return (
@@ -36,38 +38,62 @@ function UploadFiles(): JSX.Element {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    stroke-width="2"
+                    strokeWidth="2"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                     />
                   </svg>
                   <span className="font-medium text-gray-600">
-                    Drop files to Attach, or{" "}
-                    <span className="text-blue-600 underline">browse</span>
+                    Drop pdf files to Attach, or{" "}
+                    <span className="text-blue-600 underline">browse pdf</span>
                   </span>
                 </span>
-                <input type="file" name="file_upload" className="hidden" />
+                <input
+                  type="file"
+                  name="file_upload"
+                  className="hidden"
+                  multiple
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                />
               </label>
             </div>
             <div className="w-full">
               <div className="text-3xl font-semibold text-gray-800 mb-4">
                 Your uploaded documents
               </div>
-              <div className="border-2 h-96 flex items-center justify-center rounded">
-                <span className="font-semibold">
-                  Currently nothing is uploaded
-                </span>
+              <div
+                className={`border-2 h-96 ${
+                  files.length <= 0 && "flex items-center justify-center"
+                }  rounded`}
+              >
+                {files.length > 0 ? (
+                  <div className="flex gap-2 flex-col p-5">
+                    {files.map((file, index) => (
+                      <span
+                        key={index}
+                        className="text-gray-700 p-2 bg-blue-200 rounded"
+                      >
+                        {file.name}
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <span className="font-semibold">
+                    Currently nothing is uploaded
+                  </span>
+                )}
               </div>
             </div>
             <div className="w-full border-2 h-80 p-4 rounded">
               <div className="text-2xl font-semibold text-gray-800 mb-4">
-                Your price for 4 files would be
+                Your price for {files.length} files would be
               </div>
               <div className="text-7xl font-bold text-green-500 mb-4 flex w-full justify-center mt-16">
-                ₹ 100
+                ₹ {files.length * 100}
               </div>
             </div>
             <div className="w-full border-2 h-80 p-4 rounded">

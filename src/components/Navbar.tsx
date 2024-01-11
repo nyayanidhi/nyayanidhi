@@ -10,7 +10,10 @@ import logoutFunc from "@/firebase/auth/logout";
 
 export default function Navbar() {
   return (
-    <div className="w-full flex justify-end py-3 px-4 bg-slate-800 border-b">
+    <div className="w-full flex justify-between py-3 px-4 bg-slate-800 border-b">
+      <div className="flex items-center">
+        <div className="text-white font-bold text-xl">Nyaya Nidhi</div>
+      </div>
       <DropdownMenu>
         <DropdownMenuTrigger className="bg-[#19c37d] rounded px-3 py-2">
           <svg

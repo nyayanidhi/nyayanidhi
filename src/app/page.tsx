@@ -61,60 +61,61 @@ export default function HomeComponent() {
               Sign In
             </div>
             <h2 className="block mt-1 text-2xl leading-tight font-bold text-black dark:text-white">
-              Welcome back
+              Welcome back to Nyaya Nidhi
             </h2>
           </div>
         </CardHeader>
         <CardContent>
-          <div className="px-8">
-            <div className="mb-5">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1"
-                id="email"
-                placeholder="name@gmail.com"
-                required
-                type="email"
-              />
-            </div>
-            <div className="mb-5">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                className="mt-1"
-                id="password"
-                required
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <Button className="w-full mb-5" type="submit" onClick={handleForm}>
-              Sign In
-            </Button>
-            <div className="w-full flex justify-between">
-              <Link
-                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
-                href="#"
+          <form onSubmit={handleForm}>
+            <div className="px-8">
+              <div className="mb-5">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-1"
+                  id="email"
+                  placeholder="name@gmail.com"
+                  required
+                  type="email"
+                />
+              </div>
+              <div className="mb-5">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  className="mt-1"
+                  id="password"
+                  required
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <Button className="w-full mb-5" type="submit">
+                Sign In
+              </Button>
+              <div className="w-full flex justify-between">
+                <Link
+                  className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+                  href="#"
+                >
+                  Forgot password?
+                </Link>
+                <Link
+                  className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+                  href="/signup"
+                >
+                  Don't have an account?
+                </Link>
+              </div>
+              <Separator className="my-8" />
+              <Button
+                className="w-full flex justify-center items-center gap-2"
+                variant="outline"
               >
-                Forgot password?
-              </Link>
-              <Link
-                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
-                href="/signup"
-              >
-                Don't have an account?
-              </Link>
+                <ChromeIcon className="w-5 h-5" />
+                Sign in with Google
+              </Button>
             </div>
-
-            <Separator className="my-8" />
-            <Button
-              className="w-full flex justify-center items-center gap-2"
-              variant="outline"
-            >
-              <ChromeIcon className="w-5 h-5" />
-              Sign in with Google
-            </Button>
-          </div>
+          </form>
         </CardContent>
       </Card>
     </main>
