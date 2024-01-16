@@ -4,10 +4,14 @@ import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import ProtectedRoute from "@/components/Protected";
 
+interface Output {
+  download_url: string;
+}
+
 function OutputPage(): JSX.Element {
   const lcl = localStorage.getItem("2ndEnd");
   const [output, setOutput] = useState(false);
-  const [outputData, setOutputData] = useState(null);
+  const [outputData, setOutputData] = useState<Output | null>(null);
 
   useEffect(() => {
     const fetchDownload = async (lcl: string) => {

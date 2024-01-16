@@ -22,6 +22,43 @@ interface FileObject {
   option: string;
 }
 
+const InputFileTypes = [
+  "Select",
+  "FIR",
+  "482",
+  "Complaint",
+  "Charge Sheet",
+  "Order",
+  "Notice",
+  "Petition",
+  "Written Statement",
+  "Judgement",
+  "Order sheet",
+  "Written Petition",
+  "Response to Appeals",
+];
+
+const OutputTypes = [
+  { name: "Select", disabled: false },
+  { name: "appeal", disabled: false },
+  { name: "petition", disabled: false },
+  { name: "written_statement", disabled: false },
+  { name: "482", disabled: false },
+  { name: "writ_petition", disabled: false },
+  { name: "impleading_application", disabled: false },
+  { name: "injunction_app", disabled: false },
+  { name: "criminal_appeal", disabled: true },
+  { name: "response_to_appeal", disabled: true },
+  { name: "notices", disabled: false },
+  { name: "revision_petition", disabled: true },
+  { name: "criminal_petition", disabled: true },
+  { name: "criminal_complaint", disabled: true },
+  { name: "consumer_complaint", disabled: true },
+  { name: "version_consumercourts", disabled: true },
+  { name: "translations", disabled: false },
+  { name: "summarisations", disabled: false },
+];
+
 function UploadFiles(): JSX.Element {
   const { user } = useAuthContext() as { user: any };
   const [files, setFiles] = useState<{ file: File; option: string }[]>([]);
@@ -245,25 +282,14 @@ function UploadFiles(): JSX.Element {
                           defaultValue={""}
                           onChange={(e) => handleSelectChange(e, index)}
                         >
-                          <option value={""}>Select</option>
-                          <option value={"FIR"}>FIR</option>
-                          <option value={"482"}>482</option>
-                          <option value={"Complaint"}>Complaint</option>
-                          <option value={"Charge Sheet"}>Charge Sheet</option>
-                          <option value={"Order"}>Order</option>
-                          <option value={"Notice"}>Notice</option>
-                          <option value={"Petition"}>Petition</option>
-                          <option value={"Written Statement"}>
-                            Written Statement
-                          </option>
-                          <option value={"Judgement"}>Judgement</option>
-                          <option value={"Order sheet"}>Order sheet</option>
-                          <option value={"Written Petition"}>
-                            Written Petition
-                          </option>
-                          <option value={"Response to Appeals"}>
-                            Response to Appeals
-                          </option>
+                          {InputFileTypes.map((type, index) => {
+                            let typex = type === "Select" ? "" : type;
+                            return (
+                              <option key={index} value={typex}>
+                                {type}
+                              </option>
+                            );
+                          })}
                         </select>
                       </div>
                     ))}
@@ -294,34 +320,22 @@ function UploadFiles(): JSX.Element {
                     onChange={handleOutputChange}
                     defaultValue={""}
                   >
-                    <option value={""}>Select</option>
-                    <option value={"Notices"}>Notices</option>
-                    <option value={"Petitions"}>Petitions</option>
-                    <option value={"Written Statements"}>
-                      Written Statements
-                    </option>
-                    <option value={"Criminal Appeal"}>Criminal Appeal</option>
-                    <option value={"Criminal Complaint"}>
-                      Criminal Complaint
-                    </option>
-                    <option value={"Criminal Petition"}>
-                      Criminal Petition
-                    </option>
-                    <option value={"Write Petitions"}>Write Petitions</option>
-                    <option value={"482"}>482</option>
-                    <option value={"Impleading Applications"}>
-                      Impleading Applications
-                    </option>
-                    <option value={"Bail"}>Bail</option>
-                    <option value={"Consumer Complaint"}>
-                      Consumer Complaint
-                    </option>
-                    <option value={"Version (Consumer Complaint)"}>
-                      Version (Consumer Complaint)
-                    </option>
+                    {OutputTypes.map((type, index) => {
+                      let typex = type.name === "Select" ? "" : type.name;
+                      if (type.disabled)
+                        return (
+                          <option key={index} value={typex} disabled>
+                            {type.name}
+                          </option>
+                        );
+                      return (
+                        <option key={index} value={typex}>
+                          {type.name}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
-                {/* <Link href={`/chatwithapp`} className="w-full"> */}
                 <Button className="bg-blue-500 w-full" onClick={uploadFiles}>
                   Proceed
                 </Button>
@@ -346,7 +360,6 @@ function UploadFiles(): JSX.Element {
                     {response}
                   </div>
                 )}
-                {/* </Link> */}
               </div>
             </div>
           </div>
@@ -391,6 +404,7 @@ function UploadFiles(): JSX.Element {
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <button
+                  disabled={loading ? true : false}
                   onClick={choosenFiles}
                   type="button"
                   className="mt-3 inline-flex w-full justify-center rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
