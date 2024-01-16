@@ -70,7 +70,7 @@ function UploadFiles(): JSX.Element {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const [checkedFiles, setCheckedFiles] = useState([]);
+  const [checkedFiles, setCheckedFiles] = useState<string[][]>([]);
 
   const handleCheck = (file: FileObject, isChecked: boolean) => {
     if (isChecked) {
