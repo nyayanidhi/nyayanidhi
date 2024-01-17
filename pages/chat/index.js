@@ -13,6 +13,8 @@ export default function ChatPage() {
   const [convo_key, setConvo_key] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [inputText, setInputText] = useState("");
+
   useEffect(() => {
     const InitChat = async () => {
       const apir2 = JSON.parse(localStorage.getItem("apir2"));
@@ -54,6 +56,46 @@ export default function ChatPage() {
     }
   }, []);
 
+  const handleSend = async () => {
+    setIsLoading(true);
+    setChatText((prev) => [...prev, { response: inputText, user: "user" }]);
+    setInputText("");
+    const Mydata = {
+      session_id: localStorage.getItem("session_id"),
+      convo_key: convo_key,
+      history_path: historyPath,
+      message: inputText,
+    };
+
+    const response = await ChatRequestInit(Mydata);
+    if (response.success) {
+      if (!response.data.continue) {
+        setTimeout(() => {
+          window.location.href = "/output";
+          return;
+        }, 1000);
+      }
+      if (response.data.ai_response !== chatText[chatText.length - 1]) {
+        let temp = {
+          response: response.data.ai_response,
+          user: "ai",
+        };
+
+        setChatText((prev) => [...prev, temp]);
+      }
+      setHistoryPath(response.data.history_path);
+      setContKey(response.data.continue);
+      setConvo_key(response.data.convo_key);
+    } else {
+      let temp = {
+        response: "Failed to initialize chat",
+        user: "ai",
+      };
+      setChatText((prev) => [...prev, temp]);
+    }
+    setIsLoading(false);
+  };
+
   return (
     <main>
       <PageCard>
@@ -92,10 +134,12 @@ export default function ChatPage() {
           <div className="border-t p-4">
             <div className="flex space-x-2">
               <Input
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
                 className="flex-1"
                 placeholder="Type your message here..."
               />
-              <Button>Send</Button>
+              <Button onClick={handleSend}>Send</Button>
             </div>
           </div>
         </div>
