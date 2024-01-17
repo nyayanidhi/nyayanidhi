@@ -11,6 +11,7 @@ export default function ChatPage() {
   const [historyPath, setHistoryPath] = useState("");
   const [contKey, setContKey] = useState(false);
   const [convo_key, setConvo_key] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const InitChat = async () => {
@@ -46,6 +47,7 @@ export default function ChatPage() {
         };
         setChatText((prev) => [...prev, temp]);
       }
+      setIsLoading(false);
     };
     if (initFlag) {
       InitChat();
@@ -61,9 +63,6 @@ export default function ChatPage() {
         >
           <div className="flex flex-col flex-1 overflow-y-auto p-4 space-y-4">
             {chatText.map((text, index) => {
-              if (index === 0 && chatText.length === 1) {
-                return;
-              }
               if (text.user === "ai") {
                 return (
                   <div className="flex items-end space-x-2" key={index}>
@@ -88,6 +87,7 @@ export default function ChatPage() {
                 );
               }
             })}
+            {isLoading && <div>Loading...</div>}
           </div>
           <div className="border-t p-4">
             <div className="flex space-x-2">
