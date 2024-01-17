@@ -70,6 +70,7 @@ export default function ChatPage() {
     const response = await ChatRequestInit(Mydata);
     if (response.success) {
       if (!response.data.continue) {
+        localStorage.setItem("convo_key", response.data.convo_key);
         setTimeout(() => {
           window.location.href = "/output";
           return;

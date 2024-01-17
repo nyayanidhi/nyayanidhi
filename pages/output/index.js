@@ -9,15 +9,21 @@ export default function OutPutPage() {
   const apir2 = JSON.parse(localStorage.getItem("apir2"));
   const converse = localStorage.getItem("converse") === "true" ? true : false;
   const session_id = localStorage.getItem("session_id");
+  const convo_key = localStorage.getItem("convo_key");
 
   useEffect(() => {
     const fetchOutput = async () => {
-      const response = await DownloadRequest(
-        user.primaryEmailAddress,
-        session_id,
-        apir2,
-        converse
-      );
+      const Mydata = {
+        session_id: session_id,
+        moreinfo_data: apir2,
+        email_id: user.primaryEmailAddress.emailAddress,
+        converse: converse,
+      };
+      if (converse) {
+        Mydata.convo_key = convo_key;
+      }
+
+      const response = await DownloadRequest(Mydata);
       console.log(response);
       if (response.success) {
         setSuccess(true);

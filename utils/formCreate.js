@@ -7,7 +7,7 @@ export function UploadFormCreate(files, outputSection, user) {
   formData.append("user_id", user.id);
   formData.append("session_id", sessionid);
   formData.append("output_request", outputSection);
-  formData.append("email_id", user.primaryEmailAddress);
+  formData.append("email_id", user.primaryEmailAddress.emailAddress);
   files.forEach((fileObject, index) => {
     formData.append(`file_type${index + 1}`, fileObject.option);
     formData.append(`file${index + 1}`, fileObject.file);

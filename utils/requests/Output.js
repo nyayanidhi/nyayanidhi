@@ -1,18 +1,8 @@
 import axios from "axios";
 
-export function DownloadRequest(email_id, session_id, moreinfo_data, converse) {
+export function DownloadRequest(data) {
   return axios
-    .post("https://nyayanidhi.azurewebsites.net/output", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify({
-        email: email_id,
-        session_id: session_id,
-        converse: converse,
-        moreinfo_data: moreinfo_data,
-      }),
-    })
+    .post("https://nyayanidhi.azurewebsites.net/output", data)
     .then((response) => {
       if (response.status === 200) {
         return {
