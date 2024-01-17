@@ -61,7 +61,7 @@ export default function ChatPage() {
         >
           <div className="flex flex-col flex-1 overflow-y-auto p-4 space-y-4">
             {chatText.map((text, index) => {
-              if (index === 0) {
+              if (index === 0 && chatText.length === 1) {
                 return;
               }
               if (text.user === "ai") {
