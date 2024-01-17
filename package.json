@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-13-firebase-starter",
+  "name": "nyaya-nidhi",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,30 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@radix-ui/react-dropdown-menu": "^2.0.6",
-    "@radix-ui/react-label": "^2.0.2",
-    "@radix-ui/react-separator": "^1.0.3",
+    "@clerk/nextjs": "^4.29.3",
+    "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
-    "@types/node": "20.8.10",
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.15",
     "axios": "^1.6.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "eslint": "8.48.0",
-    "eslint-config-next": "14.0.3",
-    "firebase": "^10.4.0",
-    "lucide-react": "^0.303.0",
-    "next": "14.0.3",
-    "postcss": "8.4.31",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "lucide-react": "^0.311.0",
+    "next": "14.0.4",
+    "next-auth": "^4.24.5",
+    "react": "^18",
+    "react-dom": "^18",
     "tailwind-merge": "^2.2.0",
-    "tailwindcss": "3.3.5",
-    "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.2.2",
-    "uuid": "^9.0.1"
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0"
   }
 }

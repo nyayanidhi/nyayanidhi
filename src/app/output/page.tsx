@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import ProtectedRoute from "@/components/Protected";
+import LoadingIcon from "@/assets/icons/LoadingIcon";
 
 interface Output {
   download_url: string;
@@ -10,28 +11,45 @@ interface Output {
 
 function OutputPage(): JSX.Element {
   const lcl = localStorage.getItem("2ndEnd");
-  const [output, setOutput] = useState(false);
+  const [output, setOutput] = useState<boolean>(false);
   const [outputData, setOutputData] = useState<Output | null>(null);
+  const [respFail, setRespFail] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchDownload = async (lcl: string) => {
-      const conv = localStorage.getItem("converse") === "true" ? true : false;
-      const body = {
-        session_id: localStorage.getItem("sessionId"),
-        converse: conv,
-        moreinfo_data: JSON.parse(lcl),
-      };
-      const resp = await fetch("https://nyayanidhi.azurewebsites.net/output", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      const data = await resp.json();
-      console.log(data);
-      setOutputData(data);
+      try {
+        const conv = localStorage.getItem("converse") === "true" ? true : false;
+        const body = {
+          session_id: localStorage.getItem("sessionId"),
+          converse: conv,
+          moreinfo_data: JSON.parse(lcl),
+        };
+
+        const resp = await fetch(
+          "https://nyayanidhi.azurewebsites.net/output",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+          }
+        );
+
+        if (!resp.ok) {
+          // Check if the response status is not okay
+          throw new Error(`Failed to fetch data. Status: ${resp.status}`);
+        }
+
+        const data = await resp.json();
+        console.log(data);
+        setOutputData(data);
+      } catch (error: any) {
+        console.error("Error fetching data:", error.message);
+        // Handle the error or log it as needed
+      }
     };
+
     if (lcl) {
       fetchDownload(lcl);
     }
@@ -52,14 +70,13 @@ function OutputPage(): JSX.Element {
             Your output is here
           </div>
           <div className="w-full flex justify-center mt-10 flex-col items-center gap-10">
-            {output ? (
+            {lcl === null ? (
               <div>Nothing to download</div>
             ) : (
               <div className="w-full flex justify-center mt-10 flex-col items-center gap-10">
-                <span className="text-3xl">
-                  Your output files has been generated
-                </span>
+                <span className="text-3xl">Your output is being generated</span>
                 <div className="flex flex-col gap-4">
+                  {!outputData && <LoadingIcon />}
                   {outputData && (
                     <>
                       <a

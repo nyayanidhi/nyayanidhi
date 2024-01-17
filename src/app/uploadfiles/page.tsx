@@ -70,13 +70,15 @@ function UploadFiles(): JSX.Element {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const [checkedFiles, setCheckedFiles] = useState<string[][]>([]);
+  const [checkedFiles, setCheckedFiles] = useState<any>([]);
 
   const handleCheck = (file: FileObject, isChecked: boolean) => {
     if (isChecked) {
-      setCheckedFiles((prev) => [...prev, [file.option, file.file.name]]);
+      setCheckedFiles((prev: any) => [...prev, [file.option, file.file.name]]);
     } else {
-      setCheckedFiles((prev) => prev.filter((f) => f[1] !== file.file.name));
+      setCheckedFiles((prev: any) =>
+        prev.filter((f: any) => f[1] !== file.file.name)
+      );
     }
   };
 
@@ -167,7 +169,7 @@ function UploadFiles(): JSX.Element {
     const notInCheckedFiles = apiResponse?.file_info.filter(
       (apiFile) =>
         !checkedFiles.some(
-          (checkedFile) =>
+          (checkedFile: any) =>
             checkedFile[0] === apiFile[0] && checkedFile[1] === apiFile[1]
         )
     );
