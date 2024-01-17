@@ -75,6 +75,7 @@ export default function ChatPage() {
           return;
         }, 1000);
       }
+
       if (response.data.ai_response !== chatText[chatText.length - 1]) {
         let temp = {
           response: response.data.ai_response,
