@@ -44,7 +44,7 @@ export default function OutPutPage() {
     }
   }, []);
   return (
-    <>
+    <Layout>
       <main>
         <PageCard>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -117,6 +117,6 @@ export default function OutPutPage() {
           setShowModal={setShowModal}
         />
       </main>
-    </>
+    </Layout>
   );
 }
