@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 
+import Layout from "@/components/Layout";
 import PageCard from "@/components/PageCard";
 import UploadBox from "@/components/UploadBox";
 import ShowFiles from "@/components/ShowFiles";
@@ -14,7 +15,6 @@ import { UploadFormCreate } from "@/utils/formCreate";
 import { UploadRequest } from "@/utils/requests/UploadPage";
 
 import LoadingIcon from "@/assets/icon-components/LoadingIcon";
-import Layout from "@/components/Layout";
 
 export default function Home() {
   const { user } = useUser();
