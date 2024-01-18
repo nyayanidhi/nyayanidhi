@@ -5,9 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 export default function App({ Component, pageProps }) {
   return (
     <ClerkProvider {...pageProps}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
     </ClerkProvider>
   );
 }

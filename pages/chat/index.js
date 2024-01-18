@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { ChatRequestInit } from "@/utils/requests/ChatReq";
+import Layout from "@/components/Layout";
 
 export default function ChatPage() {
   const [initFlag, setInitFlag] = useState(true);
@@ -99,53 +100,58 @@ export default function ChatPage() {
   };
 
   return (
-    <main>
-      <PageCard>
-        <div
-          className="flex flex-col h-full"
-          style={{ minHeight: "calc(100vh - 145px)" }}
-        >
-          <div className="flex flex-col flex-1 overflow-y-auto p-4 space-y-4">
-            {chatText.map((text, index) => {
-              if (text.user === "ai") {
-                return (
-                  <div className="flex items-end space-x-2" key={index}>
-                    <Avatar>
-                      <AvatarFallback>A</AvatarFallback>
-                    </Avatar>
-                    <div className="p-2 rounded-lg bg-blue-500 text-white max-w-xs">
-                      <p className="text-sm">{text.response}</p>
+    <Layout>
+      <main>
+        <PageCard>
+          <div
+            className="flex flex-col h-full"
+            style={{ minHeight: "calc(100vh - 145px)" }}
+          >
+            <div className="flex flex-col flex-1 overflow-y-auto p-4 space-y-4">
+              {chatText.map((text, index) => {
+                if (text.user === "ai") {
+                  return (
+                    <div className="flex items-end space-x-2" key={index}>
+                      <Avatar>
+                        <AvatarFallback>A</AvatarFallback>
+                      </Avatar>
+                      <div className="p-2 rounded-lg bg-blue-500 text-white max-w-xs">
+                        <p className="text-sm">{text.response}</p>
+                      </div>
                     </div>
-                  </div>
-                );
-              } else {
-                return (
-                  <div className="flex items-end space-x-2 ml-auto" key={index}>
-                    <div className="p-2 rounded-lg bg-gray-200 text-gray-900 max-w-xs">
-                      <p className="text-sm">{text.response}</p>
+                  );
+                } else {
+                  return (
+                    <div
+                      className="flex items-end space-x-2 ml-auto"
+                      key={index}
+                    >
+                      <div className="p-2 rounded-lg bg-gray-200 text-gray-900 max-w-xs">
+                        <p className="text-sm">{text.response}</p>
+                      </div>
+                      <Avatar>
+                        <AvatarFallback>U</AvatarFallback>
+                      </Avatar>
                     </div>
-                    <Avatar>
-                      <AvatarFallback>U</AvatarFallback>
-                    </Avatar>
-                  </div>
-                );
-              }
-            })}
-            {isLoading && <div>Loading...</div>}
-          </div>
-          <div className="border-t p-4">
-            <div className="flex space-x-2">
-              <Input
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                className="flex-1"
-                placeholder="Type your message here..."
-              />
-              <Button onClick={handleSend}>Send</Button>
+                  );
+                }
+              })}
+              {isLoading && <div>Loading...</div>}
+            </div>
+            <div className="border-t p-4">
+              <div className="flex space-x-2">
+                <Input
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  className="flex-1"
+                  placeholder="Type your message here..."
+                />
+                <Button onClick={handleSend}>Send</Button>
+              </div>
             </div>
           </div>
-        </div>
-      </PageCard>
-    </main>
+        </PageCard>
+      </main>
+    </Layout>
   );
 }

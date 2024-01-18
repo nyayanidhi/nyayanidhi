@@ -6,7 +6,7 @@ export default function Navbar() {
       <div className="flex items-center">
         <div className="text-white font-bold text-xl">Nyaya Nidhi</div>
       </div>
-      <UserButton />
+      <UserButton afterSignOutUrl="/" />
     </div>
   );
 }

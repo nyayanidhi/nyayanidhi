@@ -1,50 +1,67 @@
-import PageCard from "@/components/PageCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { DownloadRequest } from "@/utils/requests/Output";
+
+import PageCard from "@/components/PageCard";
+import UploadBox from "@/components/UploadBox";
+import ShowFiles from "@/components/ShowFiles";
+import ChoosePopUp from "@/components/ChoosePopUp";
+import { ToastAction } from "@/components/ui/toast";
+
+import { useToast } from "@/components/ui/use-toast";
+import { uploadValidation } from "@/utils/validators";
+import { OutputTypes } from "@/utils/constants";
+import { UploadFormCreate } from "@/utils/formCreate";
+import { UploadRequest } from "@/utils/requests/UploadPage";
+
+import LoadingIcon from "@/assets/icon-components/LoadingIcon";
 import Layout from "@/components/Layout";
 
-export default function OutPutPage() {
+export default function Home() {
   const { user } = useUser();
-  const [success, setSuccess] = useState(true);
-  const apir2 = JSON.parse(localStorage.getItem("apir2"));
-  const converse = localStorage.getItem("converse") === "true" ? true : false;
-  const session_id = localStorage.getItem("session_id");
-  const convo_key = localStorage.getItem("convo_key");
+  const { toast } = useToast();
+  const [files, setFiles] = useState([]);
+  const [outputSection, setOutputSection] = useState("");
+  const [checkedFiles, setCheckedFiles] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchOutput = async () => {
-      const Mydata = {
-        session_id: session_id,
-        moreinfo_data: apir2,
-        email_id: user.primaryEmailAddress.emailAddress,
-        converse: converse,
-      };
-      if (converse) {
-        Mydata.convo_key = convo_key;
-      }
-
-      const response = await DownloadRequest(Mydata);
-      console.log(response);
-      if (response.success) {
-        setSuccess(true);
-      } else {
-        setSuccess(false);
-      }
-      localStorage.removeItem("apir2");
-      localStorage.removeItem("session_id");
-      localStorage.removeItem("converse");
-      localStorage.removeItem("apir");
-      localStorage.removeItem("init");
-    };
-    if (apir2 != null) {
-      fetchOutput();
-    } else {
-      setSuccess(false);
+  const handleUpload = async () => {
+    const { isValid, errorMessage } = uploadValidation(files, outputSection);
+    if (!isValid) {
+      toast({
+        title: "Error: Validation",
+        description: errorMessage,
+        variant: "destructive",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+      return;
     }
-  }, []);
+    const formData = UploadFormCreate(files, outputSection, user);
+    setIsLoading(true);
+    const response = await UploadRequest(formData);
+    setIsLoading(false);
+    if (response.success) {
+      toast({
+        title: "Success",
+        description: response.message,
+        variant: "success",
+        action: <ToastAction altText="Okay">Okay</ToastAction>,
+      });
+      setShowModal(true);
+      localStorage.setItem("apir", JSON.stringify(response.data));
+    } else {
+      toast({
+        title: "Error: Upload",
+        description: response.message,
+        variant: "destructive",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+      localStorage.removeItem("session_id");
+    }
+  };
+
   return (
-    <>
+    <Layout>
       <main>
         <PageCard>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -117,6 +134,6 @@ export default function OutPutPage() {
           setShowModal={setShowModal}
         />
       </main>
-    </>
+    </Layout>
   );
 }
