@@ -4,6 +4,7 @@ import PopUpModal from "./PopUpModal";
 
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "./ui/use-toast";
+import { useEffect } from "react";
 
 const ChoosePopUp = ({
   showModal,
@@ -13,12 +14,13 @@ const ChoosePopUp = ({
   outputSection,
   setShowModal,
 }) => {
+  const apiFiles = JSON.parse(localStorage.getItem("apir"));
   const { toast } = useToast();
   const handleCheck = (file, isChecked) => {
     if (isChecked) {
-      setCheckedFiles((prev) => [...prev, [file.option, file.file.name]]);
+      setCheckedFiles((prev) => [...prev, file]);
     } else {
-      setCheckedFiles((prev) => prev.filter((f) => f[1] !== file.file.name));
+      setCheckedFiles((prev) => prev.filter((f) => f[1] !== file[1]));
     }
   };
 
@@ -29,7 +31,6 @@ const ChoosePopUp = ({
       apirObj.file_info,
       outputSection
     );
-
     const response = await ChooseRequest(data);
     if (response.success) {
       localStorage.setItem("apir2", JSON.stringify(response.data));
@@ -67,14 +68,14 @@ const ChoosePopUp = ({
               Choose your files to interact with
             </h3>
             <div className="mt-2 flex gap-4">
-              {files.length > 0 &&
-                files.map((file, index) => {
+              {apiFiles.file_info &&
+                apiFiles.file_info.map((file, index) => {
                   return (
                     <div
                       className="bg-blue-300 p-2 flex gap-4 rounded"
                       key={index}
                     >
-                      <span>{file.file.name}</span>
+                      <span>{file[1]}</span>
                       <input
                         type="checkbox"
                         className="ml-6 accent-blue-300 md:accent-blue-500"
