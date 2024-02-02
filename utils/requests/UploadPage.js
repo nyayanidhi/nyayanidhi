@@ -1,3 +1,4 @@
+import { headers } from "@/next.config";
 import axios from "axios";
 
 export function UploadRequest(formData) {
