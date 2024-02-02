@@ -62,10 +62,6 @@ export default function Home() {
     }
   };
 
-  if (errorD.fail) {
-    console.log(errorD);
-  }
-
   return (
     <main>
       <PageCard>
