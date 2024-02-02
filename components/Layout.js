@@ -1,8 +1,7 @@
+import { useAuth } from "@clerk/nextjs";
 import Head from "next/head";
 import Navbar from "./Navbar";
 import { Toaster } from "@/components/ui/toaster";
-
-import { useAuth } from "@clerk/nextjs";
 
 export default function Layout({ children }) {
   const { isLoaded, userId } = useAuth();
