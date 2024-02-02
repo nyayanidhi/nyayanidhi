@@ -1,14 +1,13 @@
 import { uuidv4 } from "@/lib/utils";
 
 export function UploadFormCreate(files, outputSection, user) {
-  const sessionid =
-    user.primaryEmailAddress.emailAddress + "_" + new Date().getTime();
+  const sessionid = user.email + "_" + new Date().getTime();
   const formData = new FormData();
 
-  formData.append("user_id", user.id);
+  formData.append("user_id", user.sub);
   formData.append("session_id", sessionid);
   formData.append("output_request", outputSection);
-  formData.append("email_id", user.primaryEmailAddress.emailAddress);
+  formData.append("email_id", user.email);
   files.forEach((fileObject, index) => {
     formData.append(`file_type${index + 1}`, fileObject.option);
     formData.append(`file${index + 1}`, fileObject.file);

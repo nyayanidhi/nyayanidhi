@@ -1,13 +1,13 @@
-import Layout from "@/components/Layout";
 import "@/styles/globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
+import Layout from "@/components/Layout";
 
 export default function App({ Component, pageProps }) {
   return (
-    <ClerkProvider {...pageProps}>
+    <UserProvider>
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </ClerkProvider>
+    </UserProvider>
   );
 }

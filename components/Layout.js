@@ -1,22 +1,28 @@
 import Head from "next/head";
 import Navbar from "./Navbar";
+import Hero from "./Hero";
 import { Toaster } from "@/components/ui/toaster";
 
-import { useAuth } from "@clerk/nextjs";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function Layout({ children }) {
-  const { isLoaded, userId } = useAuth();
-  if (!isLoaded || !userId) {
+  const { user, isLoading } = useUser();
+  if (isLoading) {
     return null;
   }
-  return (
-    <>
-      <Head>
-        <title>Nyaya Nidhi</title>
-      </Head>
-      <Navbar />
-      <main className="bg-gray-200">{children}</main>
-      <Toaster />
-    </>
-  );
+
+  if (user) {
+    return (
+      <>
+        <Head>
+          <title>Nyaya Nidhi</title>
+        </Head>
+        <Navbar />
+        <main className="bg-gray-200">{children}</main>
+        <Toaster />
+      </>
+    );
+  }
+
+  return <Hero />;
 }

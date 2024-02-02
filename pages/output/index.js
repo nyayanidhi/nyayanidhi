@@ -1,6 +1,6 @@
 import PageCard from "@/components/PageCard";
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { DownloadRequest } from "@/utils/requests/Output";
 
 export default function OutPutPage() {
@@ -16,7 +16,7 @@ export default function OutPutPage() {
       const Mydata = {
         session_id: session_id,
         moreinfo_data: apir2,
-        email_id: user.primaryEmailAddress.emailAddress,
+        email_id: user.email,
         converse: converse,
       };
       if (converse) {
