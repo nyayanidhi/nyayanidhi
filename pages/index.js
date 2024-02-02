@@ -12,6 +12,7 @@ import { uploadValidation } from "@/utils/validators";
 import { OutputTypes } from "@/utils/constants";
 import { UploadFormCreate } from "@/utils/formCreate";
 import { UploadRequest } from "@/utils/requests/UploadPage";
+import CheckUser from "@/components/CheckUser";
 
 import LoadingIcon from "@/assets/icon-components/LoadingIcon";
 
@@ -23,6 +24,8 @@ export default function Home() {
   const [checkedFiles, setCheckedFiles] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { iLoading, errorD } = CheckUser(user);
 
   const handleUpload = async () => {
     const { isValid, errorMessage } = uploadValidation(files, outputSection);
@@ -58,6 +61,10 @@ export default function Home() {
       localStorage.removeItem("session_id");
     }
   };
+
+  if (iLoading) {
+    return null;
+  }
 
   return (
     <main>
