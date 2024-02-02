@@ -62,8 +62,8 @@ export default function Home() {
     }
   };
 
-  if (iLoading) {
-    return null;
+  if (errorD.fail) {
+    console.log(errorD);
   }
 
   return (
