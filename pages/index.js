@@ -12,7 +12,6 @@ import { uploadValidation } from "@/utils/validators";
 import { OutputTypes } from "@/utils/constants";
 import { UploadFormCreate } from "@/utils/formCreate";
 import { UploadRequest } from "@/utils/requests/UploadPage";
-// import CheckUser from "@/components/CheckUser";
 
 import LoadingIcon from "@/assets/icon-components/LoadingIcon";
 
