@@ -14,6 +14,7 @@ const ChoosePopUp = ({
   setShowModal,
 }) => {
   const apiFiles = JSON.parse(localStorage.getItem("apir"));
+
   const { toast } = useToast();
   const handleCheck = (file, isChecked) => {
     if (isChecked) {
@@ -67,7 +68,8 @@ const ChoosePopUp = ({
               Choose your files to interact with
             </h3>
             <div className="mt-2 flex gap-4">
-              {apiFiles.file_info !== null &&
+              {apiFiles !== null &&
+                apiFiles.file_info.length > 0 &&
                 apiFiles.file_info.map((file, index) => {
                   return (
                     <div
