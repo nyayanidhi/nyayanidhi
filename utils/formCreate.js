@@ -1,5 +1,3 @@
-import { uuidv4 } from "@/lib/utils";
-
 export function UploadFormCreate(files, outputSection, user) {
   const sessionid = user.email + "_" + new Date().getTime();
   const formData = new FormData();

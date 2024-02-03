@@ -4,7 +4,6 @@ import PopUpModal from "./PopUpModal";
 
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "./ui/use-toast";
-import { useEffect } from "react";
 
 const ChoosePopUp = ({
   showModal,
@@ -68,7 +67,7 @@ const ChoosePopUp = ({
               Choose your files to interact with
             </h3>
             <div className="mt-2 flex gap-4">
-              {apiFiles.file_info &&
+              {apiFiles.file_info !== null &&
                 apiFiles.file_info.map((file, index) => {
                   return (
                     <div
