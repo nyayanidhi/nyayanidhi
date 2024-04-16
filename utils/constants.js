@@ -12,6 +12,7 @@ export const InputFileTypes = [
   "Order sheet",
   "Written Petition",
   "Response to Appeals",
+  "OCR",
 ];
 
 export const OutputTypes = [
@@ -33,4 +34,5 @@ export const OutputTypes = [
   { name: "version_consumercourts", disabled: true },
   { name: "translations", disabled: false },
   { name: "summarisations", disabled: false },
+  { name: "ocr", disabled: false },
 ];
