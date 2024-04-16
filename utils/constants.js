@@ -10,11 +10,9 @@ export const InputFileTypes = [
   "Written Statement",
   "Judgement",
   "Order sheet",
-  "Writ Petition",
+  "Written Petition",
   "Response to Appeals",
-  "enactments",
-  "precedents",
-  "interlocutory_application",
+  "OCR",
 ];
 
 export const OutputTypes = [
@@ -36,4 +34,5 @@ export const OutputTypes = [
   { name: "version_consumercourts", disabled: true },
   { name: "translations", disabled: false },
   { name: "summarisations", disabled: false },
+  { name: "ocr", disabled: false },
 ];
