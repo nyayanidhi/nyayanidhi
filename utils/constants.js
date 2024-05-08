@@ -10,8 +10,11 @@ export const InputFileTypes = [
   "Written Statement",
   "Judgement",
   "Order sheet",
-  "Written Petition",
+  "Writ Petition",
   "Response to Appeals",
+  "enactments",
+  "precedents",
+  "interlocutory_application",
   "OCR",
 ];
 
