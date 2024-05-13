@@ -81,7 +81,7 @@ export default function Home() {
               Your price for {files.length} files would be
             </div>
             <div className="text-7xl font-bold text-green-500 mb-4 flex w-full justify-center mt-16">
-              ₹ {files.length * 100}
+              ₹0
             </div>
           </div>
           <div className="w-full border-2 h-80 p-4 rounded flex flex-col gap-3">
