@@ -1,1 +1,1 @@
-# Nyayanidhi
+# Nyayanidhi App
