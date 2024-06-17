@@ -16,6 +16,7 @@ export const InputFileTypes = [
   "precedents",
   "interlocutory_application",
   "OCR",
+  "OCR Format"
 ];
 
 export const OutputTypes = [
@@ -38,4 +39,5 @@ export const OutputTypes = [
   { name: "translations", disabled: false },
   { name: "summarisations", disabled: false },
   { name: "ocr", disabled: false },
+  { name: "ocr_format", disabled: false },
 ];
