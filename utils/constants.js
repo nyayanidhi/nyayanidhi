@@ -37,4 +37,5 @@ export const OutputTypes = [
   { name: "summarisations", disabled: false },
   { name: "ocr", disabled: false },
   { name: "ocr_format", disabled: false },
+  { name: "case_note", disabled: false },
 ];
